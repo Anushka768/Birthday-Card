@@ -1,0 +1,114 @@
+/*Global Page Setup */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+/*background*/
+body{
+    margin:0;
+    height: 100%;
+    overflow:hidden;
+    font-family: 'Brush Script MT', cursive;
+    background: linear-gradient(-45deg, #ff4f8b, #ff8ccf, #ffc1e3, #ffdda3c7, #ffdde1);
+    background-size: 400% 400%;
+    animation: gradientMove 18s ease infinite; /* name duration direction iteration_count */
+}
+
+@keyframes gradientMove{ /*horizontal move*/
+    0% {background-position: 0% 50%;} /*left*/
+    50% {background-position:100% 50%;}/*right*/
+    100% {background-position:0% 50%;}/*left*/
+}
+
+.side-decoration{
+    position:fixed;
+    top:0;
+    width:120px;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+    background: radial-gradient(circle at 30% 10%, rgba(255,255,255,.35), transparent 60%), radial-gradient(circle at 70% 50%, rgba(255,182,213,.5), transparent 60%), radial-gradient(circle at 40% 90%, rgba(255,255,255,.25), transparent 60%);
+}
+
+.side-decoration.left{
+    left:0;
+    border-right: 2px solid rgba(255,255,255,.3)
+}
+
+.side-decoration.right{
+    right:0;
+    border-left: 2px solid rgba(255,255,255,.3)
+}
+
+body::after{
+    content:'';
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-image: radial-gradient(circle, rgba(255,255,255,.25) 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:.15;
+    pointer-events:none;
+    animation:twinkle 6s linear infinite;
+}
+
+@keyframes twinkle {
+    from { background-position: 0 0; }
+    to   { background-position: 40px 40px; }
+}
+
+/*Card*/
+.card{
+    position:relative; /*relative: normal flow*/
+    width:300px;
+    height:385px;
+    margin:60px auto 0 auto; /* location of the card: top right bottom left, auto positions it centre */
+    background-size:cover;
+    -webkit-perspective: 1200px;
+    perspective: 1200px;
+}
+
+.inside, .outside{
+    border: 5px solid rgba(248, 28, 116, 0.689);
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.inside{
+    left:0;
+    background-color:antiquewhite;
+    z-index:-1;
+}
+
+.outside{
+    left:0;
+    position:absolute;
+    width:100%;
+    transform-origin: left center; /* hinge on left */
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.card.open .outside{
+    transform: rotateY(-180deg);
+}
+
+.cover-outer,  .cover-inside{
+    position:absolute; /*relative: removed normal flow*/
+    width: 100%; /*100% of parent card*/
+    height: 100%;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    overflow:hidden; /*hides extra image outside of card dimensions*/
+}
+
+.cover-inside{ 
+    background-color:antiquewhite;
+    transform: rotateY(180deg); /*places the cover inside on the back side of cover like in actual physical card*/
+}
+
