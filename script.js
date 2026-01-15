@@ -16,7 +16,6 @@ let blown = false; // tracks if candles blown
 window.addEventListener("load", () => {
   if (window.confetti) {
     confetti.start();
-    setTimeout(() => confetti.stop(), 2000);
   }
 });
 
@@ -32,38 +31,9 @@ document.addEventListener("keydown", (e) => {
 
   if (!cardOpen) {
     resetCandles();
-    confetti.stop();
   }
 });
 
-document.addEventListener("click", (e) => {
-  if (blown) return;
-
-  // Check if a candle or its flame was clicked
-  const candle = e.target.closest(".candle");
-  if (!candle) return;
-
-  blowOutCandles();
-});
-
-function blowOutCandles() {
-  blown = true;
-
-  const candles = document.querySelectorAll(".candle");
-
-  candles.forEach((candle, index) => {
-    setTimeout(() => {
-      candle.classList.add("blown");
-    }, index * 120);
-  });
-
-  // 🎉 CONFETTI
-  setTimeout(() => {
-    if (window.confetti) {
-      confetti.start(3000);
-    }
-  }, 800);
-}
 // ===============================
 // RESET CANDLES
 // ===============================
