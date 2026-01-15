@@ -1,27 +1,16 @@
-// ===============================
-// ELEMENTS
-// ===============================
 const card = document.querySelector(".card");
 const candles = document.querySelectorAll(".candle");
 
-// ===============================
-// STATE
-// ===============================
 let cardOpen = false;
-let blown = false; // tracks if candles blown
 
-// ===============================
-// PAGE LOAD CONFETTI (auto stop)
-// ===============================
+// PAGE LOAD CONFETTI 
 window.addEventListener("load", () => {
   if (window.confetti) {
     confetti.start();
   }
 });
 
-// ===============================
 // SPACE → OPEN / CLOSE CARD
-// ===============================
 document.addEventListener("keydown", (e) => {
   if (e.code !== "Space") return;
 
@@ -34,10 +23,3 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// ===============================
-// RESET CANDLES
-// ===============================
-function resetCandles() {
-  blown = false;
-  candles.forEach((c) => c.classList.remove("blown"));
-}
